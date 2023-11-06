@@ -15,7 +15,7 @@ def create_table():
   connection = create_connection()
   cursor = connection.cursor()
   cursor.execute("""
-  CREATE TABLE IF NOT EXISTS dados (
+  CREATE TABLE IF NOT EXISTS geo (
     id SERIAL PRIMARY KEY,
     numOriginal INTEGER NOT NULL,
     furo VARCHAR(25) NOT NULL,
@@ -24,13 +24,13 @@ def create_table():
     tipoMaterial VARCHAR(20) NOT NULL
   );
   
-  CREATE TABLE IF NOT EXISTS ref_furos (
+  CREATE TABLE IF NOT EXISTS refGeo (
     id SERIAL PRIMARY KEY,
-    location_i INTERGER NOT NULL,
+    location_i INTEGER NOT NULL,
     status VARCHAR(20) NOT NULL,
-    location_x VARCHAR(25),
-    location_y VARCHAR(25),
-    length VARCHAR(25),
+    location_x DOUBLE PRECISION,
+    location_y DOUBLE PRECISION,
+    location_z DOUBLE PRECISION,
     fase VARCHAR(3) NOT NULL,
     banco VARCHAR(3) NOT NULL,
     poligono VARCHAR(8) NOT NULL
