@@ -6,8 +6,18 @@ import Controllers.RefGeoController as refGeoController
 import models.RefGeo as refGeo
 
 def cadastrar():
+    idAlteracao = st.experimental_get_query_params()
+    st.experimental_set_query_params()
+    if idAlteracao.get("id") != None:
+        idAlteracao = idAlteracao.get("id")[0]
+        st.write(refGeoController.SelecionarById(idAlteracao).status)
+        st.title("Editar Tabela de referência")
+    
+    else:
+        st.title("Registro Tabela de referência")
+        
+        
     db.create_table()
-    st.title("Registro Tabela de referência")
     
     location_i = st.number_input("Location_I:", min_value=0, placeholder="0")
     

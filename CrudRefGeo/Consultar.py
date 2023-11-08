@@ -18,3 +18,5 @@ def consultar():
     )
 
     st.data_editor(df)
+    
+    refGeoController.exportToExcel(df)

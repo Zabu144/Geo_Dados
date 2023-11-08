@@ -35,18 +35,24 @@ def createRefGeo(refGeo):
     connection.close()
 
 
-
 def SelecionarById(id):
     connection = create_connection()
     cursor = connection.cursor()
-    cursor.execute("SELECT * refGeo WHERE id = %s", id)
+    cursor.execute("SELECT * FROM refGeo WHERE id = %s", id)
     refGeoList = []
     
     for row in cursor.fetchall():
         refGeoList.append(refGeo.RefGeo(row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7], row[8]))
         
-    return refGeoList
+    return refGeoList[0]
 
+def deleteRefGeo(id):
+    connection = create_connection()
+    cursor = connection.cursor()
+    cursor.execute("""DELETE FROM refGeo WHERE id = %s""", 
+    (id))
+    connection.commit()
+    connection.close()
 
 def updateRefGeo(refGeo):
     connection = create_connection()
@@ -80,3 +86,17 @@ def readRefGeo():
         refGeoList.append(refGeo.RefGeo(row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7], row[8]))
     
     return refGeoList
+
+
+def exportToExcel(df):
+    output = io.BytesIO()
+    with pd.ExcelWriter(output, engine='xlsxwriter') as writer:
+        df.to_excel(writer, sheet_name="dados", index=False)
+        
+    output.seek(0)
+    b64 = base64.b64encode(output.read()).decode()
+    
+    href = f'<a href="data:application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;base64,{b64}" download="Geo.xlsx">Geo.xlsx</a>'
+    st.markdown(href, unsafe_allow_html=True)
+    
+    df.to_excel("Geo.xlsx", index=False)
