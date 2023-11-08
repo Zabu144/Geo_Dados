@@ -36,6 +36,10 @@ def alterar():
                 )
                 st.experimental_rerun()
     else:
+        on_click_voltar = st.button("←  Voltar")
+        if on_click_voltar:
+            st.experimental_set_query_params()
+            st.experimental_rerun
         Cadastrar.cadastrar()  
         
         

@@ -59,7 +59,7 @@ def updateRefGeo(refGeo):
     cursor = connection.cursor()
     print("Alterando...")
     count = cursor.execute("""
-    UPDATE refGep
+    UPDATE refGeo
     SET location_i = %s,
     status = %s,
     location_x = %s,
@@ -70,7 +70,7 @@ def updateRefGeo(refGeo):
     poligono = %s
     WHERE id = %s                
     """,
-    refGeo.location_i, refGeo.status, refGeo.location_x, refGeo.location_y, refGeo.location_z, refGeo.fase, refGeo.banco, refGeo.poligono, refGeo.id).rowcount
+    (refGeo.location_i, refGeo.status, refGeo.location_x, refGeo.location_y, refGeo.location_z, refGeo.fase, refGeo.banco, refGeo.poligono, refGeo.id))
     connection.commit()
     connection.close()
     

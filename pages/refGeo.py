@@ -12,6 +12,7 @@ st.sidebar.title('Menu')
 refGeoCrud = st.sidebar.selectbox('CRUD', ['Cadastrar', 'Consultar', 'Editar/Excluir'])
 
 if refGeoCrud == 'Cadastrar':
+    st.experimental_set_query_params()
     Cadastrar.cadastrar()
 
 if refGeoCrud == 'Consultar':
