@@ -31,9 +31,9 @@ def create_table():
     location_x DOUBLE PRECISION,
     location_y DOUBLE PRECISION,
     location_z DOUBLE PRECISION,
-    fase VARCHAR(3) NOT NULL,
-    banco VARCHAR(3) NOT NULL,
-    poligono VARCHAR(8) NOT NULL
+    fase VARCHAR(10) NOT NULL,
+    banco VARCHAR(10) NOT NULL,
+    poligono VARCHAR(20) NOT NULL
   )
                  """)
   connection.commit()

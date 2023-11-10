@@ -26,7 +26,7 @@ def cadastrar():
         
     db.create_table()
     
-    listStatus = ["Não Amostrar", "Executado"]
+    listStatus = ["Nao Amostrar", "Executado"]
     listFase = ["F02", "F03", "F04", "F05"]
     
     if dadoRecuperado == None:
@@ -123,51 +123,34 @@ def cadastrar():
     uploaded_file = st.file_uploader("Selecione um arquivo CSV", type="csv")
     if st.button("Importar CSV"):
         if uploaded_file is not None:
-            # Ler o arquivo CSV
+           
             df = pd.read_csv(uploaded_file, sep=';')
             st.write(df)
             
             print(df.info())
-            df['location_i'].to_string()
+            df['location_x'].to_string()
+            df['location_y'].to_string()
+            df['location_z'].to_string()
             
-            # Conectar ao banco de dados
-            # connection = db.create_connection()
-            # cursor = connection.cursor()
+            connection = db.create_connection()
+            cursor = connection.cursor()
 
-            # Inserir os dados do arquivo CSV no banco de dados
-            # for index, row in df.iterrows():
-            #     print(row)
-                # location_i = int(row["location_i"])
-                # status = row["status"]
-                # location_x = float(row["location_x"])
-                # location_y = float(row["location_y"])
-                # location_z = float(row["location_z"])
-                # fase = row["fase"]
-                # banco = row["banco"]
-                # poligono = row["poligono"]
+            for index, row in df.iterrows():
+                print(row)
+                location_i = int(row["location_i"])
+                status = row["status"]
+                location_x = float(row["location_x"].replace('.', ''))
+                location_y = float(row["location_y"].replace('.', ''))
+                location_z = float(row["location_z"].replace('.', ''))
+                fase = row["fase"]
+                banco = row["banco"]
+                poligono = row["poligono"]
 
-                # cursor.execute("""
-                #     INSERT INTO refGeo (location_i, status, location_x, location_y, location_z, fase, banco, poligono)
-                #     VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
-                # """, (location_i, status, location_x, location_y, location_z, fase, banco, poligono))
-
-            # Confirmar as alterações e fechar a conexão
-            # connection.commit()
-            # connection.close()
+                cursor.execute("""
+                    INSERT INTO refGeo (location_i, status, location_x, location_y, location_z, fase, banco, poligono)
+                    VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
+                """, (location_i, status, location_x, location_y, location_z, fase, banco, poligono))
+            connection.commit()
+            connection.close()
 
             st.success("Dados importados com sucesso!")
-       
-    # uploaded_file = st.file_uploader("Selecione um arquivo CSV", type="csv")
-    # if uploaded_file is not None:
-        
-
-    #         # To convert to a string based IO:
-    #         stringio = StringIO(uploaded_file.getvalue().decode("utf-8"))
-
-    #         # To read file as string:
-    #         string_data = stringio.read()
-    #         st.write(string_data)
-
-    #         # Can be used wherever a "file-like" object is accepted:
-    #         dataframe = pd.read_csv(uploaded_file)
-    #         st.write(dataframe)
