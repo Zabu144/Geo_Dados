@@ -4,6 +4,9 @@ import psycopg2
 import services.database as db
 import Controllers.RefGeoController as refGeoController
 import models.RefGeo as refGeo
+import csv
+import pandas as pd
+from io import StringIO
 
 def cadastrar():
     idAlteracao = st.experimental_get_query_params()
@@ -116,3 +119,55 @@ def cadastrar():
                 st.success("Dados alterados com sucesso!")
             else:
                 st.error("Preencha todos os campos!")
+                
+    uploaded_file = st.file_uploader("Selecione um arquivo CSV", type="csv")
+    if st.button("Importar CSV"):
+        if uploaded_file is not None:
+            # Ler o arquivo CSV
+            df = pd.read_csv(uploaded_file, sep=';')
+            st.write(df)
+            
+            print(df.info())
+            df['location_i'].to_string()
+            
+            # Conectar ao banco de dados
+            # connection = db.create_connection()
+            # cursor = connection.cursor()
+
+            # Inserir os dados do arquivo CSV no banco de dados
+            # for index, row in df.iterrows():
+            #     print(row)
+                # location_i = int(row["location_i"])
+                # status = row["status"]
+                # location_x = float(row["location_x"])
+                # location_y = float(row["location_y"])
+                # location_z = float(row["location_z"])
+                # fase = row["fase"]
+                # banco = row["banco"]
+                # poligono = row["poligono"]
+
+                # cursor.execute("""
+                #     INSERT INTO refGeo (location_i, status, location_x, location_y, location_z, fase, banco, poligono)
+                #     VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
+                # """, (location_i, status, location_x, location_y, location_z, fase, banco, poligono))
+
+            # Confirmar as alterações e fechar a conexão
+            # connection.commit()
+            # connection.close()
+
+            st.success("Dados importados com sucesso!")
+       
+    # uploaded_file = st.file_uploader("Selecione um arquivo CSV", type="csv")
+    # if uploaded_file is not None:
+        
+
+    #         # To convert to a string based IO:
+    #         stringio = StringIO(uploaded_file.getvalue().decode("utf-8"))
+
+    #         # To read file as string:
+    #         string_data = stringio.read()
+    #         st.write(string_data)
+
+    #         # Can be used wherever a "file-like" object is accepted:
+    #         dataframe = pd.read_csv(uploaded_file)
+    #         st.write(dataframe)
