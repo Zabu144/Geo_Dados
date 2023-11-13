@@ -26,7 +26,7 @@ def consultar():
     
     values = st.slider(
         'Sua Distância é:',
-        de, 1.0, (de, ate)
+        de, 1.0, (de, ate),
     )
     st.write('Values:', values)
 

@@ -16,16 +16,3 @@ if geoCrud == 'Consultar':
 
 if geoCrud == 'Editar/Excluir':
   ...
-
-  
-
-# refGeoCrud = st.sidebar.selectbox('Tabela Ref. Geo', ['Cadastrar', 'Consultar', 'Editar/Excluir'])
-
-# if refGeoCrud == 'Cadastrar':
-#     st.title("Regitro Tabela de referência")
-
-# if refGeoCrud == 'Consultar':
-#     ...
-    
-# if refGeoCrud == 'Editar/Excluir':
-#     ...
