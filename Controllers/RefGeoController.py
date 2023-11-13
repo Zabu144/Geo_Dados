@@ -100,3 +100,18 @@ def exportToExcel(df):
     st.markdown(href, unsafe_allow_html=True)
     
     df.to_excel("Geo.xlsx", index=False)
+    
+def get_concatenated_values(id):
+    connection = create_connection()
+    cursor = connection.cursor()
+
+    cursor.execute("""
+        SELECT CONCAT(fase, '-', banco, '-', poligono, '-') 
+        FROM refGeo 
+        WHERE id = %s
+    """, (id,))
+
+    concatenated_value = cursor.fetchone()[0]
+    connection.close()
+    
+    return concatenated_value

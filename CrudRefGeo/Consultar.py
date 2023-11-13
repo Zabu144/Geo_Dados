@@ -20,3 +20,14 @@ def consultar():
     st.data_editor(df)
     
     refGeoController.exportToExcel(df)
+    
+    de = 0.0
+    ate = 0.40
+    
+    values = st.slider(
+        'Sua Distância é:',
+        de, 1.0, (de, ate)
+    )
+    st.write('Values:', values)
+
+    st.write(refGeoController.get_concatenated_values(2))

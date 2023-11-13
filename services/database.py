@@ -21,7 +21,22 @@ def create_table():
     furo VARCHAR(25) NOT NULL,
     geometalurgico BOOLEAN,
     status VARCHAR(20) NOT NULL,
-    tipoMaterial VARCHAR(20) NOT NULL
+    tipoMaterial VARCHAR(20) NOT NULL,
+    deCM DOUBLE PRECISION,
+    ateCM DOUBLE PRECISION,
+    profundidadePlanejada DOUBLE PRECISION,
+    alturaCone DOUBLE PRECISION,
+    profundidadeExecutada DOUBLE PRECISION,
+    presencaAgua VARCHAR(4),
+    profundidadeAgua DOUBLE PRECISION,
+    tipoTerreno VARCHAR(10),
+    deM DOUBLE PRECISION,
+    ateM DOUBLE PRECISION,
+    recuperacao INTEGER,
+    observacoes VARCHAR(500),
+    data DATE,
+    turno VARCHAR(1),
+    enviadoSGS VARCHAR(4)
   );
   
   CREATE TABLE IF NOT EXISTS refGeo (
