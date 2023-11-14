@@ -106,7 +106,7 @@ def get_concatenated_values(id):
     cursor = connection.cursor()
 
     cursor.execute("""
-        SELECT CONCAT(fase, '-', banco, '-', poligono, '-') 
+        SELECT CONCAT(fase, '-', banco, '-', poligono) 
         FROM refGeo 
         WHERE id = %s
     """, (id,))
