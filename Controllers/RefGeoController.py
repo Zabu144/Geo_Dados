@@ -96,10 +96,10 @@ def exportToExcel(df):
     output.seek(0)
     b64 = base64.b64encode(output.read()).decode()
     
-    href = f'<a href="data:application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;base64,{b64}" download="Geo.xlsx">Geo.xlsx</a>'
+    href = f'<a href="data:application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;base64,{b64}" download="RefGeo.xlsx">RefGeo.xlsx</a>'
     st.markdown(href, unsafe_allow_html=True)
     
-    df.to_excel("Geo.xlsx", index=False)
+    df.to_excel("RefGeo.xlsx", index=False)
     
 def get_concatenated_values(id):
     connection = create_connection()
